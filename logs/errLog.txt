@@ -1,0 +1,4 @@
+20231020	17:52:04	3f30f4f9-0301-4bc5-9083-2e08910b17ac	Error: Not allowed by CORS
+20231020	18:03:29	1f46f05a-0f22-45f2-8bc8-eecc1a496a29	Error: Not allowed by CORS
+20231020	18:03:55	06311bc3-f709-4cd6-88ae-583c066d3a58	Error: Not allowed by CORS
+20231020	18:04:20	21927ff4-6fbd-4e26-8abb-79a0d8e7d60a	Error: Not allowed by CORS

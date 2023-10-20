@@ -7,9 +7,6 @@ router.get('^/$|index', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/*', function(req, res, next) {
-  res.status(404).render('404');
-});
 
 router.get('/getUsersData', function(req, res, next) {
   connection.query('SELECT * FROM users ORDER BY id', function(err, row){
@@ -116,5 +113,11 @@ router.get('/login', function(req, res, next) {
 router.get('/register', function(req, res, next) {
   res.render('register', { title: 'Express' });
 });
+
+
+router.all('/*', function(req, res, next) {
+  res.status(404).render('404');
+});
+
 
 module.exports = router;
