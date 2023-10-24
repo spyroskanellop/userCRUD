@@ -1,74 +1,106 @@
 var express = require('express');
 var router = express.Router();
 var connection = require('../config/db');
+var userController = require('../controllers/userController');
 
 /* GET home page. */
 router.get('^/$|index', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+// router.route('/')
+//   .get(userController.getAllUsers)
+//   .post(userController.createNewUser)
+//   .put(userController.updateUser)
+//   .delete(userController.deleteUser);
 
-router.get('/getUsersData', function(req, res, next) {
-  connection.query('SELECT * FROM users ORDER BY id', function(err, row){
-    if(err){
-      console.log("Error loading Data");
-      res.end("Error loading Data");      
-    } else {
-      console.log(row);
-      res.send(row);
-    }
-  })
-});
+// router.route('/:id')
+//   .get(userController.getUser);  
 
-router.post('/saveUser', function(req, res){
-  const userData = {
-    username : req.body.txt_username,
-    password : req.body.txt_password,
-    isActive: 1
-  };
-  console.log(userData);
+// router.get('/getUsers', ()=> {
+//   userController.getAllUsers();
+// } );
 
-  connection.query("INSERT INTO users SET?", userData, function(err, result){
-    if(err){
-      console.log(err, '{"message": "Internal Server Error", "status" : 500}');
-      res.end('{"message": "Internal Server Error", "status" : 500}'); 
-    } else {
-      console.log("Record successfully saved");
-      res.end('{"message": "Record Successfully saved", "status" : 200}'); 
-    }
-  });
-});
+// router.get('/', function(req, res, next) {
+//   connection.query('SELECT * FROM users ORDER BY id', function(err, row){
+//     if(err){
+//       console.log("Error loading Data");
+//       res.end("Error loading Data");      
+//     } else {
+//       console.log(row);
+//       res.send(row);
+//     }
+//   })
+// });
 
-router.delete('/deleteUser', function(req, res){
-  var deleteId = req.body.id;
-  connection.query('DELETE FROM users WHERE id = ?', deleteId, function(err, result){
-    if(err){
-      console.log(err, '{"message": "Internal Server Error", "status" : 500}');
-      res.end('{"message": "Internal Server Error", "status" : 500}');   
-    }else {
-      console.log("Record successfully deleted");
-      res.end('{"message": "Record Successfully deleted", "status" : 200}'); 
-    }
-  });
-});
+// router.post('/', function(req, res){
+//   const userData = {
+//     username : req.body.txt_username,
+//     password : req.body.txt_password,
+//     isActive: 1
+//   };
+//   console.log(userData);
 
-router.get("/getUser", function(req, res) {
-  var userId = req.query.id;
-  console.log("UserID: ", userId);
+//   connection.query("INSERT INTO users SET?", userData, function(err, result){
+//     if(err){
+//       console.log(err, '{"message": "Internal Server Error", "status" : 500}');
+//       res.end('{"message": "Internal Server Error", "status" : 500}'); 
+//     } else {
+//       console.log("Record successfully saved");
+//       res.end('{"message": "Record Successfully saved", "status" : 200}'); 
+//     }
+//   });
+// });
 
-  connection.query('SELECT * FROM users WHERE id = ?', userId, function(err, result){
-    if(err){
-      console.log(err, '{"message": "Internal Server Error", "status" : 500}');
-      res.end('{"message": "Internal Server Error", "status" : 500}');   
-    } else {
-      var data = JSON.stringify(result[0]);
+// router.delete('/', function(req, res){
+//   var deleteId = req.body.id;
+//   connection.query('DELETE FROM users WHERE id = ?', deleteId, function(err, result){
+//     if(err){
+//       console.log(err, '{"message": "Internal Server Error", "status" : 500}');
+//       res.end('{"message": "Internal Server Error", "status" : 500}');   
+//     }else {
+//       console.log("Record successfully deleted");
+//       res.end('{"message": "Record Successfully deleted", "status" : 200}'); 
+//     }
+//   });
+// });
 
-      console.log(`Fetched User successfully! with data ${data}`);
-      res.send(`{"message": "Fetched User successfully!", "status" : 200, "data": ${data} }`); 
-    }
-  });
+// router.get("/", function(req, res) {
+//   var userId = req.query.id;
+//   console.log("UserID: ", userId);
 
-});
+//   connection.query('SELECT * FROM users WHERE id = ?', userId, function(err, result){
+//     if(err){
+//       console.log(err, '{"message": "Internal Server Error", "status" : 500}');
+//       res.end('{"message": "Internal Server Error", "status" : 500}');   
+//     } else {
+//       var data = JSON.stringify(result[0]);
+
+//       console.log(`Fetched User successfully! with data ${data}`);
+//       res.send(`{"message": "Fetched User successfully!", "status" : 200, "data": ${data} }`); 
+//     }
+//   });
+
+// });
+
+// router.put("/", (req, res) => {
+//   console.log(req.body.username);
+//   userId = req.body.id;
+//   userUsername = req.body.username;
+//   userPass = req.body.password;
+
+//   console.log("UserID: ", userId,"\nusername: ", userUsername, "\npassword: ", userPass);
+
+//   connection.query("UPDATE users SET username= ?,password= ? WHERE id= ?", [userUsername, userPass, userId], (err, result) =>{
+//     if(err){
+//       console.log(err, '{"message": "Internal Server Error", "status" : 500}');
+//       res.end('{"message": "Internal Server Error", "status" : 500}');   
+//     } else {
+//       console.log(`User Updated successfully!`);
+//       res.end(`{"message": "User Updated successfully!", "status" : 200 }`); 
+//     }
+//   });
+// });
 
 router.post('/redirectToRegister', (req, res) => {
   userId = req.body.id;
@@ -76,29 +108,6 @@ router.post('/redirectToRegister', (req, res) => {
 
   res.send(`{"message": "Fetched User", "status" : 200, "data" : { "id" : ${userId}, "username" : ${username} }}`); 
 });
-
-
-
-router.post("/updateUser", (req, res) => {
-  console.log(req.body.username);
-  userId = req.body.id;
-  userUsername = req.body.username;
-  userPass = req.body.password;
-
-  console.log("UserID: ", userId,"\nusername: ", userUsername, "\npassword: ", userPass);
-
-  connection.query("UPDATE users SET username= ?,password= ? WHERE id= ?", [userUsername, userPass, userId], (err, result) =>{
-    if(err){
-      console.log(err, '{"message": "Internal Server Error", "status" : 500}');
-      res.end('{"message": "Internal Server Error", "status" : 500}');   
-    } else {
-      console.log(`User Updated successfully!`);
-      res.end(`{"message": "User Updated successfully!", "status" : 200 }`); 
-    }
-  });
-});
-
-
 
 
 router.get('/tables', function(req, res, next) {
@@ -115,9 +124,9 @@ router.get('/register', function(req, res, next) {
 });
 
 
-router.all('/*', function(req, res, next) {
-  res.status(404).render('404');
-});
+// router.all('/*', function(req, res, next) {
+//   res.status(404).render('404');
+// });
 
 
 module.exports = router;

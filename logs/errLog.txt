@@ -2,3 +2,7 @@
 20231020	18:03:29	1f46f05a-0f22-45f2-8bc8-eecc1a496a29	Error: Not allowed by CORS
 20231020	18:03:55	06311bc3-f709-4cd6-88ae-583c066d3a58	Error: Not allowed by CORS
 20231020	18:04:20	21927ff4-6fbd-4e26-8abb-79a0d8e7d60a	Error: Not allowed by CORS
+20231024	14:12:08	de839d06-e85c-4002-bec3-4d1e6f7d605f	NotFoundError: Not Found
+20231024	14:12:22	e168988b-78f5-494c-87f2-5c3af131c358	NotFoundError: Not Found
+20231024	14:12:34	0f7ee220-a02a-4c32-bb05-3a9ac9700dd0	NotFoundError: Not Found
+20231024	14:33:01	3ec15429-f892-40ed-a3cb-f9d32f38ac87	NotFoundError: Not Found
