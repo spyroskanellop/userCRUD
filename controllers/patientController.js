@@ -25,6 +25,7 @@ const createNewPatient = (req, res) =>{
         isActive: 1
       };
     
+      
     Patient.create({
       firstName: patientData.firstName,
       middleName: patientData.middleName,
