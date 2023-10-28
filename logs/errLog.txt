@@ -6,3 +6,10 @@
 20231024	14:12:22	e168988b-78f5-494c-87f2-5c3af131c358	NotFoundError: Not Found
 20231024	14:12:34	0f7ee220-a02a-4c32-bb05-3a9ac9700dd0	NotFoundError: Not Found
 20231024	14:33:01	3ec15429-f892-40ed-a3cb-f9d32f38ac87	NotFoundError: Not Found
+20231024	17:11:04	9d17e39a-6056-4023-9079-ceaf378e8814	NotFoundError: Not Found
+20231024	17:11:14	54bfe5af-b49a-4c2c-9136-dead09f286ec	NotFoundError: Not Found
+20231024	17:11:24	708aa76a-3cff-44af-949a-616d4f356500	NotFoundError: Not Found
+20231027	18:15:00	37a86e8c-bc4f-4240-b42f-40573ef05f5d	ReferenceError: User is not defined
+20231027	18:15:16	8b21303c-35e9-4379-b107-f6285f1c2af3	ReferenceError: User is not defined
+20231027	18:15:59	8aff29e0-33b3-493c-9a2c-e789c2b9b6a6	ReferenceError: User is not defined
+20231027	18:16:14	ce9d3bc4-e9ee-401f-9be3-36e3c22deab5	ReferenceError: userData is not defined

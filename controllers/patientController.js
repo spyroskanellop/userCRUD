@@ -1,10 +1,10 @@
 var connection = require('../config/db');
-const { User } = require('../models');
+const { Patient } = require('../models');
 
-const getAllUsers = (req, res) =>{    
-  User.findAll()
-    .then(users => {
-      res.send(users);
+const getAllPatients = (req, res) =>{    
+  Patient.findAll()
+    .then(patients => {
+      res.send(patients);
     })
     .catch(err => {
       res.end('{"message": "Internal Server Error", "status" : 500}');
@@ -12,16 +12,28 @@ const getAllUsers = (req, res) =>{
     });
 }
 
-const createNewUser = (req, res) =>{
-    const userData = {
-        username : req.body.txt_username,
-        password : req.body.txt_password,
+const createNewPatient = (req, res) =>{
+    const patientData = {
+        firstName : req.body.txt_firstName,
+        middleName : req.body.txt_middleName,
+        lastName : req.body.txt_lastName,
+        dob : req.body.txt_dob,
+        gender : req.body.txt_gender,
+        address : req.body.txt_address,
+        phoneNumber : req.body.txt_phoneNumber,
+        email : req.body.txt_email,
         isActive: 1
       };
     
-    User.create({
-      username: userData.username,
-      password: userData.password,
+    Patient.create({
+      firstName: patientData.firstName,
+      middleName: patientData.middleName,
+      lastName: patientData.lastName,
+      dob: patientData.dob,
+      gender: patientData.gender,
+      address: patientData.address,
+      phoneNumber: patientData.phoneNumber,
+      email: patientData.email,
       isActive: true
     }).then(()=>{
       console.log("Record successfully saved");
@@ -35,9 +47,8 @@ const createNewUser = (req, res) =>{
     });
 
 }
-
 //TODO change me to sequelize
-const updateUser = (req, res) => {
+const updatePatient = (req, res) => {
     userId = req.body.id;
     userUsername = req.body.username;
     userPass = req.body.password;
@@ -56,13 +67,13 @@ const updateUser = (req, res) => {
 }
 
 
-const getUser = (req, res) => {
-    var userId = req.params.id;
-  console.log("UserID: ", userId);
+const getPatient = (req, res) => {
+    var patientId = req.params.id;
+  console.log("PatientId: ", patientId);
 
-  User.findAll({ where : {id: userId}})
-    .then(users => {
-      res.send(users);
+  Patient.findAll({ where : {id: patientId}})
+    .then(patients => {
+      res.send(patients);
     })
     .catch(err => {
       res.end('{"message": "Internal Server Error", "status" : 500}');
@@ -70,9 +81,9 @@ const getUser = (req, res) => {
     });
 }
 
-const deleteUser = (req, res) => {
+const deletePatient = (req, res) => {
     var deleteId = req.body.id; 
-    User.destroy({where: {id: deleteId}})
+    Patient.destroy({where: {id: deleteId}})
     .then(() => {
       console.log("Record successfully deleted");
       res.end('{"message": "Record Successfully deleted", "status" : 200}');  
@@ -85,4 +96,4 @@ const deleteUser = (req, res) => {
 }
 
 
-module.exports = {getAllUsers, createNewUser, updateUser, getUser, deleteUser};
+module.exports = {getAllPatients, createNewPatient, updatePatient, getPatient, deletePatient};

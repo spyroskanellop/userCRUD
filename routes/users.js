@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var connection = require('../config/db');
 var userController = require('../controllers/userController');
  
-
 router.route('/')
   .get(userController.getAllUsers)
   .post(userController.createNewUser)

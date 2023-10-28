@@ -9,6 +9,7 @@ const errorHandler = require('./logs/errorHandler');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var patientsRouter = require('./routes/patients');
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/patients', patientsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,5 +48,8 @@ app.use(function(req, res, next) {
 
 app.use(errorHandler);
 
+app.all('/*', function(req, res, next) {
+  res.status(404).render('404');
+});
 
 module.exports = app;
